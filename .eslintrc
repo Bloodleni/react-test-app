@@ -1,0 +1,20 @@
+{
+    "extends": [
+        "react-native"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "plugins": [
+        "react",
+        "react-native"
+    ],
+    "env": {
+        "react-native/react-native": true
+    },
+    "rules": {
+        "import/no-unresolved": "off"
+    }
+}
