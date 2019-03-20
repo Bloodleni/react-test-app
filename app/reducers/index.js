@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import application from './application'
+import stackOverflowReducer from './stackOverflowReducer'
 
 const reducers = combineReducers({
-    application
+    stackOverflowPosts: stackOverflowReducer
 })
 
 export default reducers
