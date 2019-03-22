@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import getPostsStackOverFlow from '../actions/StackOverfLowActions'
-import Posts from '../components/Posts'
+import { getPosts } from '../actions/StackOverfLowActions'
+import PostsList from '../components/stackOverflow/PostList'
 
 class StackOverflowContainer extends Component {
   static navigationOptions = {
@@ -16,22 +16,27 @@ class StackOverflowContainer extends Component {
   };
 
   render () {
-    const { postsData, getPosts } = this.props
+    const { stackOverflow, getPosts } = this.props
     return (
-      <Posts postsData={postsData} getPosts={getPosts}/>
+      <PostsList
+        posts={stackOverflow.posts}
+        isFetching={stackOverflow.isFetching}
+        error={stackOverflow.error}
+        getData={getPosts}
+      />
     )
   }
 }
 
 const mapStateToProps = store => {
   return {
-    postsData: store.stackOverflowPosts
+    stackOverflow: store.stackOverflow
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getPosts: () => dispatch(getPostsStackOverFlow())
+    getPosts: () => dispatch(getPosts())
   }
 }
 

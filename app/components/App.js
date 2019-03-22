@@ -1,31 +1,33 @@
 import React, { Component } from 'react'
-import { 
-  createBottomTabNavigator, 
-  createAppContainer, 
-  createStackNavigator, 
+import {
+  createBottomTabNavigator,
+  createAppContainer,
+  createStackNavigator,
 } from 'react-navigation'
+import GitHubContainer from '../containers/GitHubContainer'
 import StackOverflowContainer from '../containers/StackOverflowContainer'
-import GhPage from '../containers/GhPage'
-import DetailsPage from '../containers/DetailsPage'
+import DetailContainer from '../containers/DetailContainer'
+import ModalScreen from './ModalScreen'
 
-const SfStack = createStackNavigator(
-  { 
+const StackOverflowStack = createStackNavigator(
+  {
     StackOverflow: { screen: StackOverflowContainer },
-    Details: { screen: DetailsPage }
+    Detail: { screen: DetailContainer }
   }
 )
 
-const GhStack = createStackNavigator({
-  GitHub: { screen: GhPage },
-  Details: { screen: DetailsPage },
-})
+const GitHubStack = createStackNavigator(
+  {
+    GitHub: { screen: GitHubContainer },
+    Detail: { screen: DetailContainer },
+  }
+)
 
 const AppBottomTabNavigator = createBottomTabNavigator(
   {
-    StackOverflow: { screen: SfStack },
-    GitHub: { screen: GhStack },
-  },
-  {
+    GitHub: { screen: GitHubStack },
+    StackOverflow: { screen: StackOverflowStack },
+  },{
     defaultNavigationOptions: () => ({
       tabBarOptions: {
         activeTintColor: 'tomato',
@@ -35,7 +37,18 @@ const AppBottomTabNavigator = createBottomTabNavigator(
   }
 )
 
-const AppContainer = createAppContainer(AppBottomTabNavigator)
+const Rootstack = createStackNavigator(
+  {
+    MainStack: { screen: AppBottomTabNavigator},
+    MainModal: { screen: ModalScreen}
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+  }
+)
+
+const AppContainer = createAppContainer(Rootstack)
 
 export default class App extends Component {
   render () {

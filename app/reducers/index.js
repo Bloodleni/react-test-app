@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import stackOverflowReducer from './stackOverflowReducer'
+import { stackOverflowReducer } from './stackOverflowReducer'
+import { gitHubRepositories } from './gitHubReducer'
+import { repositoryDetail } from './detailScreenReducer'
 
-const reducers = combineReducers({
-    stackOverflowPosts: stackOverflowReducer
+export const rootReducer = combineReducers({
+  stackOverflow: stackOverflowReducer,
+  gitHub: gitHubRepositories,
+  repositoryDetail: repositoryDetail,
 })
-
-export default reducers
