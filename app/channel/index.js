@@ -28,8 +28,8 @@ export default class Channel {
       )
   }
 
-  getGitHubRecordDetail (fullName) {
-    const gen_url = address.gitHubDetailRepository(fullName)
+  getGitHubRecordDetail (repoName) {
+    const gen_url = address.gitHubRepositoryDetail(repoName)
     return axios.get(gen_url)
       .then(
         res => producer.gitHubRepositoryDetail(res.data),
@@ -40,16 +40,16 @@ export default class Channel {
       )
   }
 
-  getStackOverflowRecordDetail (fullName) {
-    /*const gen_url = address.stackOverFlowDetailPost(fullName)
-    return this.getDataTest()//axios.get(gen_url)
+  getStackOverflowPostDetail (postId) {
+    const gen_url = address.stackOverflowPostDetail(postId)
+    return axios.get(gen_url)
       .then(
-        data => producer.gitHubRepo(data),
+        res => producer.stackOverflowPostDetail(res.data.items[0]),
         error => {throw `Ошибка сервера или парсинга данных. ${error}`}
       )
       .catch(
         error => {throw `Ошибка при парсинге данных. ${error}`}
-      )*/
+      )
   }
 
 }

@@ -1,21 +1,16 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, WebView } from 'react-native'
 
 export default class PostDetail extends Component{
   render () {
-    const { user, name, description } = this.props
+    const { user, title, body } = this.props
     return (
-      <View>
-        <View>
-        <Text>{user}</Text>
-  </View>
-          <View>
-          <Text>{name}</Text>
-    </View>
-            <View>
-            <Text>{description}</Text>
-      </View>
-      </View>
+      <WebView
+        originWhitelist={['*']}
+        source={{html: body}}
+        ref={'webview'}
+        automaticallyAdjustContentInsets={false}
+      />
     )
   }
 }

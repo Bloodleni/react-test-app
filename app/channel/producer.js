@@ -54,6 +54,17 @@ const producer = {
     }
 
     return detail
+  },
+
+  stackOverflowPostDetail: (res) => {
+    const detail = {
+      id: res.post_id,
+      user: res.owner.display_name,
+      title: res.title,
+      body: res.body
+    }
+
+    return detail
   }
 }
 

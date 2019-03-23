@@ -6,7 +6,7 @@ import {
   InteractionManager,
   TouchableWithoutFeedback
 } from 'react-native'
-import detailActions from '../actions/DetailsScreenActions'
+import detailActions from '../actions/DetailActions'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
 import RepositoryDetail from '../components/gitHub/RepositoryDetail'
@@ -65,8 +65,8 @@ class DetailContainer extends Component {
   }
 
   renderTemplate () {
-    const { isFetching, error, details } = this.props.detail
     const { fromPage } = this
+    const { isFetching, error, details } = fromPage === 'GitHub' ? this.props.repositoryDetail : this.props.postDetail
     if (error) {
       return (
         <ErrorContainer>
@@ -96,8 +96,8 @@ class DetailContainer extends Component {
     return (
       <PostDetail
         user={details.user}
-        name={details.name}
-        description={details.description}
+        title={details.title}
+        body={details.body}
       />
     )
   }
@@ -113,8 +113,10 @@ class DetailContainer extends Component {
 }
 
 const mapStateToProps = store => {
+  const { fromPage } = this
   return {
-    detail: store.repositoryDetail
+    repositoryDetail: store.repositoryDetail,
+    postDetail: store.postDetail
   }
 }
 

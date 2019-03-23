@@ -32,7 +32,7 @@ function getRepositoryDetail(repositoryName) {
   }
 }
 
-function getPostDetail() {
+function getPostDetail(postId) {
   return dispatch => {
     dispatch({
       type: GET_STACKOVERFLOW_POST_DETAIL,
@@ -40,7 +40,19 @@ function getPostDetail() {
     })
 
     const channel = new Channel
-
+    channel.getStackOverflowPostDetail(postId)
+      .then(data =>
+        dispatch({
+            type: GET_STACKOVERFLOW_POST_DETAIL_SUCCESS,
+            payload: data
+        })
+      )
+      .catch(error =>
+        dispatch({
+          type: GET_STACKOVERFLOW_POST_DETAIL_FAIL,
+          payload: new Error(error)
+        })
+      )
   }
 }
 
